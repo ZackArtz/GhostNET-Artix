@@ -90,13 +90,13 @@ class Faded:
 			log('[{0}] (Re)start your tor service --> '.format(timed(),warn=True))
 			TOR_STAT = os.popen('systemctl status tor | grep \"Active\" | awk \'{print $2}\'').read()
 			if TOR_STAT == "active":
-				call(['systemctl','restart','tor'],stdout=fnull,stderr=fnull)
+				call(['sv','restart','tor'],stdout=fnull,stderr=fnull)
 			else:
-				call(['systemctl','start','tor'],stdout=fnull,stderr=fnull)
+				call(['sv','up','tor'],stdout=fnull,stderr=fnull)
 			log('done',resp=True,end=True)
 		else:
 			log('[{0}] Stop tor service --> '.format(timed(),warn=True))
-			call(['systemctl','stop','tor'],stdout=fnull,stderr=fnull)
+			call(['sv','down','tor'],stdout=fnull,stderr=fnull)
 			log('done',resp=True,end=True)
 
 	@staticmethod
